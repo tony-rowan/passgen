@@ -4,9 +4,9 @@
   import sample from "lodash.sample";
   import sampleSize from "lodash.samplesize";
 
-  import dictionary from "./services/dictionary.js";
-  import symbols from "./services/symbols.js";
-  import numbers from "./services/numbers.js";
+  import dictionary from "./services/dictionary";
+  import symbols from "./services/symbols";
+  import numbers from "./services/numbers";
 
   const password = ref("");
   const includeSymbols = ref(false);
