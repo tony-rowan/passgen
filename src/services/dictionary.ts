@@ -94974,5 +94974,5 @@ export default [
   "zurlite",
   "zutugil",
   "zuza",
-  "zwitter"
+  "zwitter",
 ];
