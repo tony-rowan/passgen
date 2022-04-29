@@ -1,53 +1,18 @@
 # passgen
 
-This template should help get you started developing with Vue 3 in Vite.
+An app to generate passwords inspired by [XKCD 936](https://xkcd.com/936/).
 
-## Recommended IDE Setup
+## Data
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin).
+It was difficult to find a suitable source of words that would be memorable.
+The dictionary here is based another project building passwords in the XKCD 936
+style. The dictionary here is based on that one -
+[gwordlist](https://media.githubusercontent.com/media/hackerb9/gwordlist).
 
-## Type Support for `.vue` Imports in TS
+I removed small words and selected the top `65536` words. I also had a little fun
+automatically generating the source from the word list with `awk`.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Cypress Component Testing](https://docs.cypress.io/guides/component-testing/introduction)
-
-```sh
-npm run test:unit # or `npm run test:unit:ci` for headless testing
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run build
-npm run test:e2e # or `npm run test:e2e:ci` for headless testing
+```bash
+$ curl https://media.githubusercontent.com/media/hackerb9/gwordlist/master/frequency-alpha-wn.txt > temp
+$ awk '(NR>1)' temp | awk '{if (length($2) > 2) print $2}' | awk '/^[a-z]*$/' | head -n 65536 | awk 'OFS="" BEGIN {print "export default ["} {print "  \"", $0, "\","} END {print "]"}' > src/services/dictionary.ts
 ```
