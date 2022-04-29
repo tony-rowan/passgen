@@ -3,7 +3,6 @@ import { ref, watch } from "vue";
 import capitalize from "lodash.capitalize";
 import sample from "lodash.sample";
 import sampleSize from "lodash.samplesize";
-import { formatDuration } from 'date-fns';
 
 import dictionary from "./services/dictionary";
 
@@ -50,8 +49,8 @@ function calculateTimeToGuessDictionary() {
   return (timeToGuessDictionary.value = timeInSeconds);
 }
 
-function humanize(duration) {
-  function format(d, u) {
+function humanize(duration: number) {
+  function format(d: number, u: string) {
     return `${d.toPrecision(4)} ${u}`
   }
 
