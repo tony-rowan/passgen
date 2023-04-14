@@ -1,3 +1,4 @@
 .DS_Store
 .nuxt
+.output
 node_modules
