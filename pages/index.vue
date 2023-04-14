@@ -4,7 +4,7 @@ import capitalize from "lodash.capitalize";
 import sample from "lodash.sample";
 import sampleSize from "lodash.samplesize";
 
-import dictionary from "./services/dictionary";
+import dictionary from "../services/dictionary";
 
 const SECONDS_IN_YEAR = 60 * 60 * 24 * 356;
 const SECONDS_IN_DAY = 60 * 60 * 24;
@@ -66,55 +66,61 @@ calculateTimeToGuessDictionary();
 </script>
 
 <template>
-  <h1 class="text-3xl text-center mb-4">PassGen</h1>
-  <p class="text-center mb-8">
-    ⚠️ Warning! Does not use cyrptographic random source! ⚠️
-  </p>
-
-  <h2 class="text-2xl text-center mb-4">Your Password</h2>
-
-  <pre
-    class="text-xl rounded-lg bg-slate-700 px-12 py-6 mb-8 w-max mx-auto whitespace-pre-line"
-  >
-    {{ password }}
-  </pre>
-
-  <button
-    @click="generatePassword"
-    class="block bg-sky-500 hover:bg-sky-700 px-6 py-2 rounded-full shadow mb-6 mx-auto"
-  >
-    Regenerate
-  </button>
-
-  <div class="flex gap-x-6 px-6 py-4 rounded-md bg-slate-800 w-max mx-auto mb-4">
-    <div class="flex gap-x-1">
-      <input type="checkbox" id="extra-long" v-model="extraLong" />
-      <label for="extra-long">Extra Long</label>
-    </div>
-  </div>
-
-
-  <div class="px-6 py-4 rounded-md bg-slate-800 w-max mx-auto text-center">
-    <div class="text-xl mb-2">
-      Time to Guess Password
-    </div>
-
-    <div class="flex gap-x-4">
+  <div class="bg-slate-900 text-white">
+    <div class="flex justify-center items-center min-h-screen">
       <div>
-        <div class="text-lg mb-2">
-          Random Guessing
-        </div>
-        <div class="text-sm">
-          {{ humanize(timeToGuessRandom) }}
-        </div>
-      </div>
+        <h1 class="text-3xl text-center mb-4">PassGen</h1>
+        <p class="text-center mb-8">
+          ⚠️ Warning! Does not use cyrptographic random source! ⚠️
+        </p>
 
-      <div>
-        <div class="text-lg mb-2">
-          Dictionary Attack
+        <h2 class="text-2xl text-center mb-4">Your Password</h2>
+
+        <pre
+          class="text-xl rounded-lg bg-slate-700 px-12 py-6 mb-8 w-max mx-auto whitespace-pre-line"
+        >
+          {{ password }}
+        </pre>
+
+        <button
+          @click="generatePassword"
+          class="block bg-sky-500 hover:bg-sky-700 px-6 py-2 rounded-full shadow mb-6 mx-auto"
+        >
+          Regenerate
+        </button>
+
+        <div class="flex gap-x-6 px-6 py-4 rounded-md bg-slate-800 w-max mx-auto mb-4">
+          <div class="flex gap-x-1">
+            <input type="checkbox" id="extra-long" v-model="extraLong" />
+            <label for="extra-long">Extra Long</label>
+          </div>
         </div>
-        <div class="text-sm">
-          {{ humanize(timeToGuessDictionary) }}
+
+
+        <div class="px-6 py-4 rounded-md bg-slate-800 w-max mx-auto text-center">
+          <div class="text-xl mb-2">
+            Time to Guess Password
+          </div>
+
+          <div class="flex gap-x-4">
+            <div>
+              <div class="text-lg mb-2">
+                Random Guessing
+              </div>
+              <div class="text-sm">
+                {{ humanize(timeToGuessRandom) }}
+              </div>
+            </div>
+
+            <div>
+              <div class="text-lg mb-2">
+                Dictionary Attack
+              </div>
+              <div class="text-sm">
+                {{ humanize(timeToGuessDictionary) }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
