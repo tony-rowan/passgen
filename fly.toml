@@ -1,0 +1,7 @@
+# fly.toml file generated for rowan-passgen on 2023-04-14T16:59:57+01:00
+
+app = "rowan-passgen"
+primary_region = "lhr"
+
+[env]
+  PORT = "8080"
